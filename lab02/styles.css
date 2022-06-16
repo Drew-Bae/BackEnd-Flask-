@@ -1,0 +1,38 @@
+.container {
+    display: grid;
+    justify-content: center;
+    grid-template: repeat(10, 4rem) / repeat(3, 4rem);
+    grid-template-areas:
+        "input input input"
+        "sin cos tan"
+        "sqr nothing power"
+        "clear clear clear"
+        "one two three"
+        "four five six"
+        "seven eight nine"
+        "nothing2 zero nothing3"
+        "plus minus times"
+        "divide decimal submit";
+    height: 100vh;
+}
+
+.box-output {
+    grid-area: input;
+    border: 1px solid black;
+}
+
+.nothing {
+    grid-area: nothing;
+}
+
+.box-reset {
+    grid-area: clear;
+}
+
+.nothing2 {
+    grid-area: nothing2;
+}
+
+.nothing3 {
+    grid-area: nothing3;
+}
