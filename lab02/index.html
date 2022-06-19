@@ -6,36 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="index.js"></script>
+    <script src="index.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
-      <div class="box-output"></div>
-      <button class="box-sin">sin</button>
-      <button class="box-cos">cos</button>
-      <button class="box-tan">tan</button>
-      <button class="box-squareRoot">&radic;</button>
-      <button class="box-power">^</button>
+      <input type="text" class="box-output" id="result" />
+      <button class="box-sin" value="sin" onclick="display('sin')">sin</button>
+      <button class="box-cos" value="cos" onclick="display('cos')">cos</button>
+      <button class="box-tan" value="tan" onclick="display('tan')">tan</button>
+      <button
+        class="box-squareRoot"
+        value="&radic;"
+        onclick="display('&radic;');"
+      >
+        &radic;
+      </button>
+      <button class="box-power" value="^" onclick="display('^')">^</button>
       <button class="nothing"></button>
-      <button class="box-reset">clear</button>
-      <button class="box-1">1</button>
-      <button class="box-2">2</button>
-      <button class="box-3">3</button>
-      <button class="box-4">4</button>
-      <button class="box-5">5</button>
-      <button class="box-6">6</button>
-      <button class="box-7">7</button>
-      <button class="box-8">8</button>
-      <button class="box-9">9</button>
+      <button class="box-reset" value="clear" onclick="clearScreen()">
+        clear
+      </button>
+      <button class="box-1" value="1" onclick="display('1')">1</button>
+      <button class="box-2" value="2" onclick="display('2')">2</button>
+      <button class="box-3" value="3" onclick="display('3')">3</button>
+      <button class="box-4" value="4" onclick="display('4')">4</button>
+      <button class="box-5" value="5" onclick="display('5')">5</button>
+      <button class="box-6" value="6" onclick="display('6')">6</button>
+      <button class="box-7" value="7" onclick="display('7')">7</button>
+      <button class="box-8" value="8" onclick="display('8')">8</button>
+      <button class="box-9" value="9" onclick="display('9')">9</button>
       <button class="nothing2"></button>
-      <button class="box-0">0</button>
+      <button class="box-0" value="0" onclick="display('0')">0</button>
       <button class="nothing3"></button>
-      <button class="box-addition">+</button>
-      <button class="box-subtration">-</button>
-      <button class="box-multiplication">&times;</button>
-      <button class="box-division">&divide;</button>
-      <button class="box-decimal">.</button>
-      <button class="box-equal">=</button>
+      <button class="box-addition" value="+" onclick="display('+')">+</button>
+      <button class="box-subtration" value="-" onclick="display('-')">-</button>
+      <button class="box-multiplication" value="*" onclick="display('*')">
+        &times;
+      </button>
+      <button class="box-division" value="/" onclick="display('/')">
+        &divide;
+      </button>
+      <button class="box-decimal" value="." onclick="display('.')">.</button>
+      <button class="box-equal" value="=" onclick="solve()">=</button>
     </div>
   </body>
 </html>
