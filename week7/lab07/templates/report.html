@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>report.html</title>
+  </head>
+  <body>
+    {% extends "base.html" %} {% block content %}
+    <p>
+      Hi {{session['username']}}, let's see if your password meets the
+      requirment
+    </p>
+    {% for word in session['password'] %} {% if word.isupper() == True or
+    word.islower() == True or session['password'][-1].isnumeric() == True %}
+    <p>{{passes}}</p>
+    {% else %}
+    <p>{{failed}}</p>
+    <ul>
+      <li>{{failedUpper}}</li>
+      <li>{{failedLower}}</li>
+      <li>{{failedNumber}}</li>
+    </ul>
+    {% endif %} {% endfor %} {% endblock %}
+  </body>
+</html>
