@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+  </head>
+  <body>
+    <h1>Welcome to the CS survey</h1>
+    <form method="post">
+      {{form.hidden_tag()}} {{form.department.label}} {{form.department}}
+      <br />
+      {{form.graduated.label}} {{form.graduated}}
+      <br />
+      {{form.degree.label}} {{form.degree}}
+      <br />
+      {{form.job_choice.label}} {{form.job_choice}}
+      <br />
+      {{form.feedback.label}} {{form.feedback}}
+      <br />
+      {{form.submit()}}
+    </form>
+  </body>
+</html>
