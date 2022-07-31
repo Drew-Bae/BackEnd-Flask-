@@ -1,6 +1,5 @@
-from crypt import methods
-from distutils.log import debug
 import os
+from urllib import request
 from flask import Flask, render_template, session, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import (StringField, SubmitField)
@@ -14,7 +13,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'lab08secretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
     os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRAC_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 db = SQLAlchemy(app)
 
@@ -34,22 +34,30 @@ class User(db.Model):
         self.email = email
         self.password = password
 
-    # def __repr__(self): (don't need?)
+    def __repr__(self):
+        return f"Some text."
 
 
 class SignInForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
+    email = StringField('Email', validators=[
+                        DataRequired()], render_kw={"placeholder": "Email"})
+    password = StringField('Password', validators=[DataRequired()], render_kw={
+                           "placeholder": "Password"})
     login = SubmitField('Login')
 
 
 class SignUpForm(FlaskForm):
-    firstName = StringField('First Name', validators=[DataRequired()])
-    lastName = StringField('Last Name', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
-    password = StringField('Password', validators=[DataRequired()])
+    firstName = StringField('First Name', validators=[DataRequired()], render_kw={
+                            "placeholder": "First Name"})
+    lastName = StringField('Last Name', validators=[DataRequired()], render_kw={
+                           "placeholder": "Last Name"})
+    email = StringField('Email', validators=[DataRequired()], render_kw={
+                        "placeholder": "Email"})
+    password = StringField('Password', validators=[DataRequired()], render_kw={
+                           "placeholder": "Password"})
     confirmPassword = StringField(
-        'Confirm Password', validators=[DataRequired()])
+        'Confirm Password', validators=[DataRequired()], render_kw={"placeholder": "Confirm Password"})
+    register = SubmitField('Register Now')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -58,24 +66,35 @@ def signin():
     if form.validate_on_submit():
         session['email'] = form.email.data
         session['password'] = form.password.data
-        # something to test with database (grab data from db)
-        # if match with db then return bottom (else message)
-        return render_template('secretPage.html', form=form)
+        test = User.query.filter_by(email=session['email']).first()
+        if test.password == session['password']:
+            return render_template('secretPage.html', form=form)
+    return render_template('signInPage.html', form=form)
 
 
-@app.route('/signup')
+@app.route('/signUpPage.html', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
+    error = None
     if form.validate_on_submit():
         session['firstName'] = form.firstName.data
         session['lastName'] = form.lastName.data
         session['email'] = form.email.data
         session['password'] = form.password.data
         session['confirmPassword'] = form.confirmPassword.data
-        # add data in db by (db.session.add/commit)
-        return render_template('secretPage.html', form=form)
+        new_user = User(session['firstName'], session['lastName'],
+                        session['email'], session['password'])
+        if session['password'] != session['confirmPassword']:
+            error = 'Password does not match'
+        else:
+            new_user = User(session['firstName'], session['lastName'],
+                            session['email'], session['password'])
+            db.session.add(new_user)
+            db.session.commit()
+            return render_template('thankYou.html', form=form)
+    return render_template('signUpPage.html', form=form, error=error)
 
 
-if __name__ == '__main___':
+if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)

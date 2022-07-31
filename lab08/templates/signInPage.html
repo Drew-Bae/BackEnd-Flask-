@@ -8,8 +8,15 @@
   </head>
   <body>
     <h1>Login to Your Account</h1>
-    <form action=""></form>
-    <p>Not a Member Yet?</p>
-    <form action=""></form>
+    <form method="post">
+      {{form.hidden_tag()}}
+      <br />
+      {{form.email}}
+      <br />
+      {{form.password}}
+      <br />
+      {{form.login()}}
+    </form>
+    <p>Not a Member Yet? <a href="./signUpPage.html">Create an Account</a></p>
   </body>
 </html>
