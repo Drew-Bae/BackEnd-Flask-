@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>University Bookstore</title>
+    <title>Cart</title>
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', filename='css/main.css') }}"
+      href="{{ url_for('static', filename='css/cart.css') }}"
     />
     <link
       rel="stylesheet"
@@ -18,10 +18,10 @@
   <body>
     <header class="header">
       <nav class="nav collapsible">
-        <h1 class="space nav__brand">University Bookstore</h1>
+        <h1 class="space nav__brand">Cart</h1>
         <ul class="list nav__list collapsible__content">
           <li class="nav__item">
-            <a href="./cart.html">{{test}}'s Cart</a>
+            <a href="./main.html">Back to Bookstore</a>
           </li>
           <li class="nav__item">
             <a href="/">Log Out</a>
@@ -29,41 +29,28 @@
         </ul>
       </nav>
     </header>
-    <h2 class="contain-header">History</h2>
     <table class="contain">
       <thead>
         <th>Title</th>
       </thead>
       <tbody>
-        {% for title in history %}
+        {% for title in title %}
         <tr>
           <td class="center">{{title}}</td>
         </tr>
         {% endfor %}
       </tbody>
-    </table>
-    <h2 class="contain-header">Horror</h2>
-    <table class="contain">
       <thead>
-        <th>Title</th>
+        <th>Total Cost</th>
       </thead>
       <tbody>
-        {% for title in horror %}
         <tr>
-          <td class="center">{{title}}</td>
+          <td class="center">${{add1}}</td>
         </tr>
-        {% endfor %}
       </tbody>
     </table>
-    <section class="center">
-      <h3><u>Add a Book to Your Cart</u></h3>
-      <form class="width" method="post">
-        {{form.hidden_tag()}}
-        <br />
-        {{form.title}}
-        <br />
-        {{form.addCart()}}
-      </form>
-    </section>
+    <form class="middle" method="post">
+      <input type="submit" value="Buy" name="buy" />
+    </form>
   </body>
 </html>
