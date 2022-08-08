@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yellow Pages</title>
+  </head>
+  <body>
+    <h1>YellowPages</h1>
+    <section>
+      <h2>Add To YellowPages</h2>
+      <form method="post">
+        {{form.hidden_tag()}} {{form.companyName.label}}
+        <br />
+        {{form.companyName}}
+        <br />
+        {{form.email.label}}
+        <br />
+        {{form.email}}
+        <br />
+        {{form.phoneNumber.label}}
+        <br />
+        {{form.phoneNumber}}
+        <br />
+        {{form.address.label}}
+        <br />
+        {{form.address}}
+        <br />
+        {{form.submit()}}
+      </form>
+    </section>
+    <section>
+      <h2>Users</h2>
+      {% for user in Users %}
+      <ul>
+        <li>{{user}}</li>
+      </ul>
+      {% endfor %}
+    </section>
+    <a href="./base.html"><h2>Delete From YellowPages</h2></a>
+    <a href="./update.html"><h2>Update YellowPages</h2></a>
+  </body>
+</html>
